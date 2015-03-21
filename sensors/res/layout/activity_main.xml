@@ -9,11 +9,13 @@
     tools:context="com.veontomo.sensors.MainActivity" >
 
     <TextView
+        android:id="@+id/intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/intro" />
     <ListView
         android:id="@android:id/list"
+        android:layout_below="@id/intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

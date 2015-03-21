@@ -1,17 +1,39 @@
 package com.veontomo.sensors;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.app.Activity;
+import android.app.ListActivity;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
+	private SensorManager mSensorManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        if (mSensorManager != null){
+            List<Sensor> sensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
+            ArrayList<String> data = new ArrayList<String>();
+            for (Sensor s : sensors){
+            	data.add(s.getName());
+            }
+    		ArrayAdapter mAdapter = new ArrayAdapter<String>(this, R.layout.sensor_info,
+    				R.id.sensorName, data);
+    		ListView listView = getListView();
+    		listView.setAdapter(mAdapter);
+        }
     }
 
 
